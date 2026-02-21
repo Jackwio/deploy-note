@@ -1,0 +1,11 @@
+.vp-doc img {
+  cursor: zoom-in;
+}
+
+.medium-zoom-overlay {
+  z-index: 30;
+}
+
+.medium-zoom-image--opened {
+  z-index: 31;
+}

@@ -8,7 +8,10 @@
 .
 ├─ docs/
 │  ├─ .vitepress/
-│  │  └─ config.ts
+│  │  ├─ config.ts
+│  │  └─ theme/
+│  │     ├─ index.ts
+│  │     └─ style.css
 │  ├─ index.md
 │  ├─ markdown-examples.md
 │  └─ api-examples.md
@@ -26,7 +29,26 @@
 - `config.ts` 會在啟動與 build 時掃描檔案系統，自動產生 sidebar。
 - `config.ts` 會自動依 GitHub Actions 環境計算 `base`，避免 GitHub Pages 子路徑部署時發生 CSS/JS 404。
 - GitHub Actions 會在 `main` 有新 commit 時，自動 build 與部署到 GitHub Pages（`.github/workflows/deploy-docs.yml`）。
-- `docs/index.md` 會在進站時自動導向筆記入口頁（目前為 `/Zeabur/overview`）。
+- `docs/.vitepress/theme/index.ts` 透過 `medium-zoom` 全域啟用「點擊圖片放大」。
+
+## 全域圖片放大設定
+
+對應檔案：
+
+- `docs/.vitepress/theme/index.ts`
+- `docs/.vitepress/theme/style.css`
+
+目前行為：
+
+- 所有筆記內容區（`.vp-doc`）中的圖片，都可點擊放大。
+- 切換頁面後會自動重新綁定，不需要每篇手動設定。
+- 若圖片在連結內（`<a><img /></a>`）或帶有 `.no-zoom`，會自動排除放大。
+
+若某張圖不想啟用放大，請在 Markdown 中改用 HTML 並加上 `no-zoom`：
+
+```html
+<img src="./image.png" alt="示意圖" class="no-zoom" />
+```
 
 ## Sidebar Item 形成規則
 
