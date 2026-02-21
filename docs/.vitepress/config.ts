@@ -5,6 +5,7 @@ import { defineConfig, type DefaultTheme } from 'vitepress'
 
 const docsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const collator = new Intl.Collator('zh-Hant')
+const siteBase = resolveSiteBase()
 
 // 根層資料夾白名單：放入名稱可在初始載入時展開
 const expandedTopLevelDirs = new Set<string>([])
@@ -121,7 +122,19 @@ function createSidebar(): DefaultTheme.SidebarItem[] {
   return directoryGroups
 }
 
+function resolveSiteBase(): string {
+  const repository = process.env.GITHUB_REPOSITORY?.split('/')[1]
+  const isGitHubActions = process.env.GITHUB_ACTIONS === 'true'
+
+  if (!isGitHubActions || !repository || repository.endsWith('.github.io')) {
+    return '/'
+  }
+
+  return `/${repository}/`
+}
+
 export default defineConfig({
+  base: siteBase,
   title: 'Deploy Note',
   description: 'Deploy on K8s or Zeabur and some Docker info',
   themeConfig: {

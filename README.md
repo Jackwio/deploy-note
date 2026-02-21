@@ -24,6 +24,7 @@
 - 所有 Markdown 筆記皆放在 `docs/`。
 - VitePress 設定檔在 `docs/.vitepress/config.ts`。
 - `config.ts` 會在啟動與 build 時掃描檔案系統，自動產生 sidebar。
+- `config.ts` 會自動依 GitHub Actions 環境計算 `base`，避免 GitHub Pages 子路徑部署時發生 CSS/JS 404。
 - GitHub Actions 會在 `main` 有新 commit 時，自動 build 與部署到 GitHub Pages（`.github/workflows/deploy-docs.yml`）。
 
 ## Sidebar Item 形成規則
@@ -99,6 +100,9 @@ npm run docs:preview
 - Workflow：`.github/workflows/deploy-docs.yml`
 - 觸發條件：push 到 `main`
 - 流程：`npm ci` -> `npm run docs:build` -> 部署 `docs/.vitepress/dist` 到 GitHub Pages
+- `base` 行為：
+  - GitHub Actions + 專案頁面（例如 `owner/deploy-note`）會自動使用 `/<repo>/`。
+  - 使用者/組織頁面 repo（`*.github.io`）或本機環境使用 `/`。
 
 ## License
 
