@@ -1,9 +1,9 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
-layout: home
-
-hero:
-  name: "Deploy Note"
-  text: "Deploy on K8s or Zeabur And Some Docker Info"
+layout: doc
 ---
 
+<script setup lang="ts">
+import OverviewPage from './Zeabur/overview.md'
+</script>
+
+<OverviewPage />
