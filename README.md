@@ -26,6 +26,7 @@
 - `config.ts` 會在啟動與 build 時掃描檔案系統，自動產生 sidebar。
 - `config.ts` 會自動依 GitHub Actions 環境計算 `base`，避免 GitHub Pages 子路徑部署時發生 CSS/JS 404。
 - GitHub Actions 會在 `main` 有新 commit 時，自動 build 與部署到 GitHub Pages（`.github/workflows/deploy-docs.yml`）。
+- `docs/index.md` 會在進站時自動導向筆記入口頁（目前為 `/Zeabur/overview`）。
 
 ## Sidebar Item 形成規則
 
