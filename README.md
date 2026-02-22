@@ -28,9 +28,11 @@
 - VitePress 設定檔在 `docs/.vitepress/config.ts`。
 - `config.ts` 會在啟動與 build 時掃描檔案系統，自動產生 sidebar。
 - `config.ts` 會自動依 GitHub Actions 環境計算 `base`，避免 GitHub Pages 子路徑部署時發生 CSS/JS 404。
+- `config.ts` 的 `themeConfig.outline` 設為 `'deep'`，讓右側大綱深度設定全域生效。
 - GitHub Actions 會在 `main` 有新 commit 時，自動 build 與部署到 GitHub Pages（`.github/workflows/deploy-docs.yml`）。
 - `docs/index.md` 改成會在進入時自動導向筆記畫面。
 - `docs/.vitepress/theme/index.ts` 透過 `medium-zoom` 全域啟用「點擊圖片放大」。
+- `docs/.vitepress/theme/style.css` 會覆寫預設 sidebar 視覺，讓目錄層級更接近 VS Code Explorer。
 
 ## 全域圖片放大設定
 
@@ -57,12 +59,25 @@
 
 1. 掃描 `docs/`，忽略隱藏檔案/資料夾與 `.vitepress`。
 2. 支援遞迴子資料夾（多層資料夾）。
-3. 每個資料夾都會建立成一個群組（即使只有 `overview.md`）。
+3. 每個資料夾都會建立成一個群組（即使只有 `overview.md`），並包在單一 root 樹狀結構。
 4. 每個資料夾內的 `.md` 會變成 item 連結。
 5. 根目錄 `index.md` 不放入 sidebar（首頁仍由 `/` 進入）。
 6. 根目錄其他 `.md`（例如 `promptfile.md`）會放在「根目錄」群組。
 7. 目錄與檔案以 `zh-Hant` locale 排序。
 8. 根層資料夾群組預設收合（collapsed）。
+
+## VS Code 風格層級導覽與全域大綱
+
+對應檔案：
+
+- `docs/.vitepress/config.ts`
+- `docs/.vitepress/theme/style.css`
+
+目前行為：
+
+- 左側 sidebar 以單一樹狀結構呈現，減少分段感。
+- 以縮排線、箭頭與檔案標記強化層級辨識，體驗更接近 VS Code 的檔案總管。
+- `themeConfig.outline = 'deep'` 為全域設定，所有文件頁面（不只特定 frontmatter）都會在右側顯示較深層標題。
 
 ## 資料夾收合設定
 

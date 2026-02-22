@@ -114,12 +114,17 @@ function createSidebar(): DefaultTheme.SidebarItem[] {
   if (rootItems.length > 0) {
     directoryGroups.unshift({
       text: '根目錄',
-      collapsed: false,
+      collapsed: true,
       items: rootItems
     })
   }
 
-  return directoryGroups
+  if (directoryGroups.length === 0) {
+    return []
+  }
+
+  // 單一 root wrapper，避免被切成多個 sidebar group，視覺更接近檔案樹
+  return [{ items: directoryGroups }]
 }
 
 function resolveSiteBase(): string {
