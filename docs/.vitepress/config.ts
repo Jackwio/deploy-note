@@ -138,6 +138,7 @@ export default defineConfig({
   title: 'Deploy Note',
   description: 'Deploy on K8s or Zeabur and some Docker info',
   themeConfig: {
+    outline: 'deep',
     nav: [{ text: 'Home', link: '/Zeabur/overview' }],
     sidebar: createSidebar()
   }
